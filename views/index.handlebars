@@ -21,17 +21,43 @@
 <form class="create-form">
 
   <div class="form-group">
-    <label for="auth">Burger Name:</label>
+    <label for="burg">Burger Name:</label>
     <input type="text" id="auth" name="burger_name">
   </div>
 
-  <button type="submit">Add Burger</button>
+  <button type="submit" id = "burg">Add Burger</button>
 </form>
 </div>
 
 {{!-- Create a container for it to move to the left side --}}
 
 <script>
+  $(function(){
+
+    //submitting the new burger name
+    $(".submit").on("click", function(event){
+      event.preventDefault();
+      var newBurger = {
+        burger_name: ("#burg").val().trim()
+      };
+
+    //sending the post request - this should send the new burger to the webpage
+  $.ajax("/api/burger", {
+    type: "POST",
+    data: newBurger
+  }).then(
+    function(){
+      console.log("created new burger");
+      location.reload();
+    }
+  )
+
+  })
+
+    })
+
+
+
 //create function that will move the burger to right side if it's marked true
 
 </script>

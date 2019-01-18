@@ -11,15 +11,20 @@ var burger = {
     },
 
    // insertOne:
+   insertOne: function(vals, cb){
+       orm.insertOne("burger", vals, function(res){
+           cb(res);
+       })
+   }
 
-   //updateOne:
+   
+   // * `updateOne()`
 
 
 };
 
 
 
-// * `updateOne()`
 
 
 
