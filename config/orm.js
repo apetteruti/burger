@@ -1,49 +1,41 @@
 //ACCESSES THE DATABASE
 
 //requiring the connection file that has the mySQL connection
-var connection = require("./connection.js");
+const connection = require("./connection.js");
 
+//create a constructor
+function ORM(table) {
+    this.table = table;
 
-// * In the `orm.js` file, create the methods that will execute the necessary MySQL commands in the controllers. 
-//These are the methods you will need to use in order to retrieve and store data in your database.
+    this.selectAll = function () {
+            const sql = `SELECT * FROM ??`;
 
-//creates the object/constructor for all the SQL functions
-var orm = {
-selectAll: function(tableInput, cb) {
+            return new Promise(function (resolve, reject) {
+                connection.query(sql, table, function (err, data) {
+                    if (err) reject(err);
+                    resolve(data);
+                });
+            })
+        },
 
-    var sql = "SELECT * FROM " + tableInput + ";";
-    connection.query(sql, function(err, result){
-        if(err){
-            throw err;
+        this.insertOne = function (burger_name) {
+            const sql = `INSERT INTO ?? (burger_name) VALUES (?)`;
+
+            return new Promise(function (resolve, reject) {
+                connection.query(sql, [table, burger_name], function (err, data) {
+                    if (err) reject(err);
+                    resolve(data);
+                });
+            })
         }
-        cb(result);
 
-    });
-},
+    // this.updateOne = function (burger_name, id) {
 
-insertOne: function (table, cb){
 
-    //Building the sql statement that will take in the values from the form
-    var sql = `INSERT INTO " + burger (burger_name) VALUES (?)`;
+    // }
 
-    connection.query(sql, vals, function (err, result){
-        if(err) {
-            throw err;
-        }
-        cb (result);
-    })
 }
 
 
-//updateOne:
-
-
-
-
-
-
-
-};
-
 // Export orm router for burger.js (model) to use
-module.exports = orm;
+module.exports = ORM;

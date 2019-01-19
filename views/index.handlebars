@@ -8,7 +8,7 @@
   {{#each burger}}
   	<li>
   		<p><span class="label">ID:</span> {{this.id}}</p>
-      <p><span class="label">Quote:</span> {{this.burger_name}}</p>
+      <p><span class="label">Burger:</span> {{this.burger_name}}</p>
 
       <button data-id="{{this.id}}" class="devquote">Devour!</button>
 
@@ -22,7 +22,7 @@
 
   <div class="form-group">
     <label for="burg">Burger Name:</label>
-    <input type="text" id="auth" name="burger_name">
+    <input type="text" id="burg" name="burger_name">
   </div>
 
   <button type="submit" id = "burg">Add Burger</button>
@@ -32,13 +32,13 @@
 {{!-- Create a container for it to move to the left side --}}
 
 <script>
-  $(function(){
+
 
     //submitting the new burger name
-    $(".submit").on("click", function(event){
+    $(".create-form").on("submit", function(event){
       event.preventDefault();
       var newBurger = {
-        burger_name: ("#burg").val().trim()
+        burger_name: $("#burg").val().trim()
       };
 
     //sending the post request - this should send the new burger to the webpage
@@ -47,14 +47,13 @@
     data: newBurger
   }).then(
     function(){
-      console.log("created new burger");
+      console.log(newBurger);
       location.reload();
     }
-  )
+  );
 
-  })
+  });
 
-    })
 
 
 

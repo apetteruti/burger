@@ -1,4 +1,5 @@
 var express = require("express");
+var exphbs = require("express-handlebars");
 
 // Set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -13,17 +14,12 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Set handlebars
-var exphbs = require("express-handlebars");
-
 // Set Handlebars as the default templating engine.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 //connects the routes
-var routes = require ("./controllers/burgers_controller.js")
-
-app.use(routes);
+require("./controllers/burgers_controller.js")(app);
 
   // Start our server so that it can begin listening to client requests.
   app.listen(PORT, function() {
