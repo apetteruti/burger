@@ -1,4 +1,30 @@
-/* .background{
+.background{
 
-    background-color: blue;
+    background-color: #C9DFEC;
+}
+
+/* .container{
+    background-color: white;
 } */
+
+/* #image{
+   
+    margin-left: 230px;
+
+} */
+.side-crop { 
+    margin-left: 240px;
+    max-width: 590px; 
+    overflow: hidden;
+    text-indent: -10px;
+ }
+
+#center{
+    text-align: center;
+}
+
+#row{
+    /* background-color: gray; */
+    margin-left: 200px;
+}
+
