@@ -7,10 +7,10 @@ const connection = require("./connection.js");
 function ORM(table) {
     this.table = table;
 
-    this.selectAll = function () {
+    this.selectAll = function() {
             const sql = `SELECT * FROM ??`;
 
-            return new Promise(function (resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 connection.query(sql, table, function (err, data) {
                     if (err) reject(err);
                     resolve(data);
@@ -18,7 +18,7 @@ function ORM(table) {
             })
         },
 
-        this.insertOne = function (burger_name) {
+        this.insertOne = function(burger_name) {
             const sql = `INSERT INTO ?? (burger_name) VALUES (?)`;
 
             return new Promise(function(resolve, reject) {
@@ -34,7 +34,7 @@ function ORM(table) {
 
         return new Promise(function(resolve, reject){
             connection.query(sql, [table, devoured, id], function(err, data){
-                if(err) reject(err);
+                if (err) reject(err);
                 resolve(data);
             });
         })

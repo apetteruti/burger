@@ -1,7 +1,7 @@
 //Import the model (burger.js)
 var burger = require("../models/burger.js");
 
-module.exports = function (app) {
+module.exports = function(app) {
 
     //when server hears call at /index, then it calls the selectAll function
     app.get("/index", function (req, res) {
@@ -14,7 +14,7 @@ module.exports = function (app) {
     });
 
     //call function to insert one burger
-    app.post("/api/burger", function(req, res) {
+    app.post("/api/burgers", function(req, res) {
         burger.insertOne(req.body.burger_name)
             .then(function(data) {
                 res.json({id: data.insertId});
@@ -25,10 +25,15 @@ module.exports = function (app) {
     });
 
     //call function to update the burger status for devour
-    app.put("/api/burger/:id", function(req, res){
-        let devoured = (req.body.devoured == "true");
+    app.put("/api/burgers/:id", function(req, res){
+        let devoured = (req.body.devoured == 1);
         burger.updateOne(devoured, req.params.id)
         .then(function(data){
+            if(data.changedRows == 0){
+                return res.status(404).end();
+            } else {
+                res.status(200).end();
+            }
             console.log(data);
         })
         .catch(function(err){

@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
 
     //submitting the new burger name
     $(".create-form").on("submit", function (event) {
@@ -8,7 +8,7 @@ $(function () {
         };
 
         //sending the post request - this should send the new burger to the webpage
-        $.ajax("/api/burger", {
+        $.ajax("/api/burgers", {
             type: "POST",
             data: newBurger
         }).then(
@@ -21,7 +21,7 @@ $(function () {
 
     $(".change-devour").on("click", function (event) {
         var id = $(this).data("id");
-        var newDevour = $(this).data("newDevour");
+        var newDevour = $(this).data("newdevour");
 
         var newDevourState = {
             devoured: newDevour
