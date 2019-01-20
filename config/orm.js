@@ -21,7 +21,7 @@ function ORM(table) {
         this.insertOne = function (burger_name) {
             const sql = `INSERT INTO ?? (burger_name) VALUES (?)`;
 
-            return new Promise(function (resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 connection.query(sql, [table, burger_name], function (err, data) {
                     if (err) reject(err);
                     resolve(data);
@@ -29,11 +29,16 @@ function ORM(table) {
             })
         }
 
-    // this.updateOne = function (burger_name, id) {
+    this.updateOne = function(devoured, id) {
+        const sql = `UPDATE ?? SET devoured = ? WHERE id = ?`;
 
-
-    // }
-
+        return new Promise(function(resolve, reject){
+            connection.query(sql, [table, devoured, id], function(err, data){
+                if(err) reject(err);
+                resolve(data);
+            });
+        })
+    }
 }
 
 

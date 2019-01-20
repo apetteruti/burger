@@ -14,8 +14,8 @@ module.exports = function (app) {
     });
 
     //call function to insert one burger
-    app.post("/api/burger", function (req, res) {
-        burger.insertOne(req.body.name)
+    app.post("/api/burger", function(req, res) {
+        burger.insertOne(req.body.burger_name)
             .then(function(data) {
                 res.json({id: data.insertId});
             })
@@ -24,12 +24,15 @@ module.exports = function (app) {
             });
     });
 
-
     //call function to update the burger status for devour
-    // app.put
-
-
-
-
-
+    app.put("/api/burger/:id", function(req, res){
+        let devoured = (req.body.devoured == "true");
+        burger.updateOne(devoured, req.params.id)
+        .then(function(data){
+            console.log(data);
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    });
 }

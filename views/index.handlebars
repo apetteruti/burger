@@ -1,20 +1,54 @@
-<div class = "container"><br><br>
-<h1>Eat-Da-Burger</h1>
+<div class="container"><br><br>
+  <div class="section">
 
-<p>Enter a burger to eat</p>
+    <h1>Eat-Da-Burger</h1>
 
-<!-- Pass in data from server.js -->
-<ul>
-  {{#each burger}}
-  	<li>
-  		<p><span class="label">ID:</span> {{this.id}}</p>
-      <p><span class="label">Burger:</span> {{this.burger_name}}</p>
+    <p>Enter a burger to eat</p>
 
-      <button data-id="{{this.id}}" class="devquote">Devour!</button>
+    <div class="row">
+      <div class="d-flex justify-content-center">
+        <div class="col-md-6">
 
-  	</li>
-  {{/each}}
-</ul>
+          <!-- Pass in data from server.js -->
+          <ul>
+            {{#each burger}}
+            {{#unless devoured}}
+            <li>
+              <p><span class="label">ID: </span> {{this.id}}<span class="label">Burger:</span> {{this.burger_name}}
+
+              <span><button data-id="{{this.id}}" class="change-dev" data-newdevour = "{{devoured}}">
+                Devour!</button></span>
+
+                {{this.devoured=true}}
+
+            </li>
+            {{/unless}}
+            {{/each}}
+          </ul>
+        </div>
+      
+    
+
+    <div class="col-md-6">
+      <ul>
+        {{#each burger}}
+        {{#if devoured}}
+        <li>
+          <p><span class="label">ID: </span> {{this.id}}<span class="label">Burger:</span> {{this.burger_name}}
+
+         <span><button data-id="{{this.id}}" class="change-dev" data-newdevour = "{{devoured}}">
+         </button>>Devour!</button></span>
+        {{this.devoured=false}}
+
+        </li>
+        {{/if}}
+        {{/each}}
+
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
 
 <h2>Add a Burger</h2>
 
@@ -25,38 +59,9 @@
     <input type="text" id="burg" name="burger_name">
   </div>
 
-  <button type="submit" id = "burg">Add Burger</button>
+  <button type="submit" id="burg">Add Burger</button>
 </form>
+</div>
 </div>
 
 {{!-- Create a container for it to move to the left side --}}
-
-<script>
-
-
-    //submitting the new burger name
-    $(".create-form").on("submit", function(event){
-      event.preventDefault();
-      var newBurger = {
-        burger_name: $("#burg").val().trim()
-      };
-
-    //sending the post request - this should send the new burger to the webpage
-  $.ajax("/api/burger", {
-    type: "POST",
-    data: newBurger
-  }).then(
-    function(){
-      console.log(newBurger);
-      location.reload();
-    }
-  );
-
-  });
-
-
-
-
-//create function that will move the burger to right side if it's marked true
-
-</script>
