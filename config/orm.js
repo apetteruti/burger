@@ -29,13 +29,14 @@ function ORM(table) {
             })
         }
 
-    this.updateOne = function(devoured, id) {
-        const sql = `UPDATE ?? SET devoured = ? WHERE id = ?`;
+    this.updateOne = function(id) {
+        const sql = `UPDATE ?? SET devoured = true WHERE id = ?`;
 
         return new Promise(function(resolve, reject){
-            connection.query(sql, [table, devoured, id], function(err, data){
+            connection.query(sql, [table, id], function(err, data){
                 if (err) reject(err);
                 resolve(data);
+                console.log(data);
             });
         })
     }

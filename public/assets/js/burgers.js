@@ -19,22 +19,24 @@ $(function() {
         );
     });
 
-    $(".change-devour").on("click", function (event) {
+    //Devour the burger on click
+    $(".change-devour").on("click", function(event) {
         var id = $(this).data("id");
-        var newDevour = $(this).data("newdevour");
-
+        console.log("ID: " + id)
+        
         var newDevourState = {
-            devoured: newDevour
+            devoured: true
         };
+        console.log(newDevourState)
 
         $.ajax("/api/burgers/" + id, {
             type: "PUT",
             data: newDevourState
         }).then(
-            function () {
-                console.log("Changed devoured to ", newDevour);
+            function() {
+                console.log("Changed devoured to ", newDevourState);
                 location.reload();
             }
         );
     });
-})
+});

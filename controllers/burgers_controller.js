@@ -1,5 +1,5 @@
 //Import the model (burger.js)
-var burger = require("../models/burger.js");
+const burger = require("../models/burger.js");
 
 module.exports = function(app) {
 
@@ -26,8 +26,8 @@ module.exports = function(app) {
 
     //call function to update the burger status for devour
     app.put("/api/burgers/:id", function(req, res){
-        let devoured = (req.body.devoured == 1);
-        burger.updateOne(devoured, req.params.id)
+        // let devoured = (req.body.devoured == 0);
+        burger.updateOne(req.params.id)
         .then(function(data){
             if(data.changedRows == 0){
                 return res.status(404).end();
