@@ -4,7 +4,7 @@ const burger = require("../models/burger.js");
 module.exports = function(app) {
 
     //when server hears call at /index, then it calls the selectAll function
-    app.get("/index", function (req, res) {
+    app.get("/", function (req, res) {
         burger.selectAll()
             .then(function (data) {
                 res.render("index", {
