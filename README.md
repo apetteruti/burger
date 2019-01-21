@@ -13,12 +13,12 @@ To indicate that the burger has been consumed, click the "Consume" button and th
 
 To run the application locally, be sure to install the following npm packages:
 
-*MySQL: npm install mysql
-*Express: npm install express
-*Handlebars: npm install express-handlebars
+* MySQL: npm install mysql
+* Express: npm install express
+* Handlebars: npm install express-handlebars
 
 The application also uses the following applications:
 
-*Bootstrap
-*JQuery
-*Node.js
+* Bootstrap
+* JQuery
+* Node.js
